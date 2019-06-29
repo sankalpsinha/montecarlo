@@ -53,13 +53,11 @@ public class MonteCarloSimulation {
         public Result call() {
             double[] returnAmountList = new double[interation];
             for (int i = 0; i < interation; i++) {
-                double wwrMultiplier = 1;
                 double returnAmount = investmentAmount;
                 for (int j = 0; j < years; j++) {
                     double rateOfReturn = rand.nextGaussian() * portfolio.risk + portfolio.meanReturn;
                     double inflationAdjustedRateOfReturn = ((1 + (rateOfReturn / 100)) / (1 + (inflation / 100)) - 1);
                     returnAmount = returnAmount * (1 + inflationAdjustedRateOfReturn);
-                    wwrMultiplier = wwrMultiplier * (1 + rateOfReturn / 100);
                 }
                 returnAmountList[i] = returnAmount;
             }
